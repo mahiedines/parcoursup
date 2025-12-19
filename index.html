@@ -3,54 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orientation IA - Prototype</title>
+    <title>Orientation IA - MVP</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .step { display: none; }
+        .step.active { display: block; }
+    </style>
 </head>
-<body class="bg-gray-50 font-sans min-h-screen flex items-center justify-center">
+<body class="bg-slate-50 font-sans min-h-screen py-10">
 
-    <div class="max-w-xl w-full bg-white shadow-2xl rounded-2xl p-8 m-4">
-        <div class="mb-8">
-            <h1 class="text-2xl font-bold text-blue-600">Orientation & Projection IA</h1>
-            <div class="w-full bg-gray-200 h-2 mt-4 rounded-full">
-                <div class="bg-blue-600 h-2 rounded-full w-1/10"></div>
+    <div class="max-w-2xl mx-auto bg-white shadow-xl rounded-3xl overflow-hidden">
+        <div class="bg-slate-100 p-6 border-b">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-blue-600 font-bold uppercase text-xs tracking-wider">Analyse de profil</span>
+                <span id="progressText" class="text-slate-400 text-xs font-medium">Étape 1 / 6</span>
             </div>
-            <p class="text-sm text-gray-500 mt-2">Étape 1 sur 21</p>
+            <div class="w-full bg-slate-200 h-2 rounded-full">
+                <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-500" style="width: 16%"></div>
+            </div>
         </div>
 
-        <form id="orientationForm">
-            <div class="space-y-6">
-                <div>
-                    <h2 class="text-lg font-semibold mb-3 text-gray-800">Bloc 1 : Consentement & Paramétrage</h2>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Acceptes-tu que tes réponses soient utilisées pour te proposer des pistes d’orientation personnalisées ?
-                    </label>
-                    <div class="flex items-center space-x-4">
-                        <label class="flex items-center"><input type="radio" name="consent" class="mr-2"> Oui</label>
-                        <label class="flex items-center"><input type="radio" name="consent" class="mr-2"> Non</label>
+        <form id="multiStepForm" class="p-8">
+            
+            <div class="step active" id="step1">
+                <h2 class="text-2xl font-black text-slate-800 mb-4">Ton avenir commence ici.</h2>
+                <p class="text-slate-600 mb-6 leading-relaxed">Ce questionnaire va durer entre 45 et 60 minutes. Il est conçu pour révéler ton potentiel inexploité et générer tes documents de candidature (CV/Lettres).</p>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                    <p class="text-sm text-blue-700"><strong>Note stratégique :</strong> Sois brutalement honnête. Plus l'IA a de détails, plus tes chances d'admission augmentent.</p>
+                </div>
+                <button type="button" onclick="nextStep(2)" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-200">Démarrer l'analyse</button>
+            </div>
+
+            <div class="step" id="step2">
+                <h2 class="text-xl font-bold text-slate-800 mb-6">Bloc 3 & 4 : Identité Scolaire</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Classe actuelle</label>
+                        <select class="w-full border-2 border-slate-100 rounded-lg p-3 focus:border-blue-500 outline-none">
+                            <option>Seconde</option>
+                            <option>Première</option>
+                            <option>Terminale</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Spécialités suivies (pour les Bac Généraux)</label>
+                        <input type="text" placeholder="Ex: Maths, SES, Physique..." class="w-full border-2 border-slate-100 rounded-lg p-3 focus:border-blue-500 outline-none">
                     </div>
                 </div>
-
-                <hr>
-
-                <div>
-                    <h2 class="text-lg font-semibold mb-3 text-gray-800">Bloc 2 : Disponibilité</h2>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        As-tu environ 45 minutes à 1 heure devant toi pour répondre calmement ?
-                    </label>
-                    <div class="flex items-center space-x-4">
-                        <label class="flex items-center"><input type="radio" name="time" class="mr-2"> Oui</label>
-                        <label class="flex items-center"><input type="radio" name="time" class="mr-2"> Pas encore</label>
-                    </div>
+                <div class="mt-8 flex justify-between">
+                    <button type="button" onclick="nextStep(1)" class="text-slate-400 font-bold">Retour</button>
+                    <button type="button" onclick="nextStep(3)" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl">Suivant</button>
                 </div>
             </div>
 
-            <div class="mt-10 flex justify-end">
-                <button type="button" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition">
-                    Suivant
-                </button>
+            <div class="step" id="step3">
+                <h2 class="text-xl font-bold text-slate-800 mb-6">Bloc 5 : Relation aux matières</h2>
+                <p class="text-sm text-slate-500 mb-6">Évalue ton intérêt pour les domaines suivants (1 = Déteste, 5 = Passionne) :</p>
+                <div class="space-y-6">
+                    <div>
+                        <label class="flex justify-between text-sm font-medium mb-2">Mathématiques / Logique <span class="text-blue-600 font-bold">Score: 3/5</span></label>
+                        <input type="range" min="1" max="5" class="w-full accent-blue-600">
+                    </div>
+                    <div>
+                        <label class="flex justify-between text-sm font-medium mb-2">Sciences Humaines / Droit <span class="text-blue-600 font-bold">Score: 3/5</span></label>
+                        <input type="range" min="1" max="5" class="w-full accent-blue-600">
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-between">
+                    <button type="button" onclick="nextStep(2)" class="text-slate-400 font-bold">Retour</button>
+                    <button type="button" onclick="nextStep(4)" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl">Suivant</button>
+                </div>
             </div>
-        </form>
-    </div>
 
-</body>
-</html>
+            <div class="step" id="step4">
+                <h2 class="text-xl font-bold text-slate-800 mb-6">Bloc 6 : Façon d'apprendre</h2>
+                <div class="space-y-4">
+                    <label class="block p-4 border-2 border-slate-100 rounded-xl cursor-pointer hover:border-blue-500 transition">
+                        <input type="radio" name="learn" class="mr-3"> J'apprends mieux en faisant (Pratique)
+                    </label>
+                    <label class="block p-4 border-2 border-slate-100 rounded-xl cursor-pointer hover:border-blue-500 transition">
+                        <input type="radio" name="learn" class="mr-3"> J'apprends mieux en écoutant (Théorie)
+                    </label>
+                </div>
+                <div class="mt-8 flex justify-between">
+                    <button type="button" onclick="nextStep(3)" class="text-slate-400 font-bold">Retour</button>
+                    <button type="button" onclick="nextStep(5)" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl">Suivant</button>
+                </div>
+            </div>
+
+            <div class="step" id="step5">
+                <h2 class="text-xl font-bold text-slate-800 mb-6 text-red-600">Bloc 15 : Le Test de Réalité</h2>
+                <p class="text-slate-600 mb-6">Es-tu prêt à sacrifier tes loisirs et tes sorties pendant 1 ou 2 ans pour réussir un concours (Médecine, Prépa) ?</p>
+                <div class="flex space-x-4">
+                    <button type="button" class="flex-1 border-2 border-slate-100 p-4 rounded-xl hover:bg-red-50 hover:border-red-500 transition font-bold">Oui, sans hésiter</button>
+                    <button type="button" class="flex-1 border-2 border-slate-100 p-4 rounded-xl hover:bg-slate-50 transition font-bold">Non, j'ai besoin d'équilibre</button>
+                </div>
+                <div class="mt-8 flex justify-between">
+                    <button type="button" onclick="nextStep(4)" class="text-slate-400 font-bold">Retour</button>
+                    <button type="button" onclick="nextStep(6)" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl">Suivant</button>
+                </div>
+            </div>
