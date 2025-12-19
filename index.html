@@ -1,2 +1,56 @@
-<h1>Plateforme Orientation IA - En construction</h1>
-<p>Le futur de Parcoursup arrive ici.</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orientation IA - Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen flex items-center justify-center">
+
+    <div class="max-w-xl w-full bg-white shadow-2xl rounded-2xl p-8 m-4">
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-blue-600">Orientation & Projection IA</h1>
+            <div class="w-full bg-gray-200 h-2 mt-4 rounded-full">
+                <div class="bg-blue-600 h-2 rounded-full w-1/10"></div>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">Étape 1 sur 21</p>
+        </div>
+
+        <form id="orientationForm">
+            <div class="space-y-6">
+                <div>
+                    <h2 class="text-lg font-semibold mb-3 text-gray-800">Bloc 1 : Consentement & Paramétrage</h2>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Acceptes-tu que tes réponses soient utilisées pour te proposer des pistes d’orientation personnalisées ?
+                    </label>
+                    <div class="flex items-center space-x-4">
+                        <label class="flex items-center"><input type="radio" name="consent" class="mr-2"> Oui</label>
+                        <label class="flex items-center"><input type="radio" name="consent" class="mr-2"> Non</label>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h2 class="text-lg font-semibold mb-3 text-gray-800">Bloc 2 : Disponibilité</h2>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        As-tu environ 45 minutes à 1 heure devant toi pour répondre calmement ?
+                    </label>
+                    <div class="flex items-center space-x-4">
+                        <label class="flex items-center"><input type="radio" name="time" class="mr-2"> Oui</label>
+                        <label class="flex items-center"><input type="radio" name="time" class="mr-2"> Pas encore</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 flex justify-end">
+                <button type="button" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition">
+                    Suivant
+                </button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
